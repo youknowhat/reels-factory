@@ -2,7 +2,8 @@
 
 > **다른 Claude/Cursor 세션에서 이렇게 시작하세요:**  
 > `~/dev/reels-factory/statistics-visualization/HANDOFF.md`와 **`storyboards/alcohol/storyboard.md`**를 읽어.  
-> **현재 상태 (2026-09-25 클라우드 세션):** A/B/C 16초 비교안은 사용자가 **전부 거절**("20년 전 모션그래픽", "기울인 뱃지로 손맛 흉내", "재미·전달력·영상미 없음"). 새 방향 = **3D 오브젝트가 곧 데이터**(소주병·짝·잔·사람) + 제품 사진급 렌더. 키프레임 7장(`storyboards/alcohol/*.jpg`, 실제 파이프라인 렌더)을 사용자에게 전달, **방향 승인 대기 중.** 승인 전에는 에피소드 제작 코드를 만들지 말 것.
+> **현재 상태 (2026-09-25 클라우드 세션):** A/B/C 16초 비교안은 사용자가 **전부 거절**("20년 전 모션그래픽", "기울인 뱃지로 손맛 흉내", "재미·전달력·영상미 없음"). 새 방향 = **3D 오브젝트가 곧 데이터**(소주병·짝·잔·사람) + 제품 사진급 렌더. 키프레임 7장(`storyboards/alcohol/*.jpg`, 실제 파이프라인 렌더)을 사용자에게 전달, **방향 승인 대기 중.** 승인 전에는 에피소드 제작 코드를 만들지 말 것.  
+> **로컬(mac) 데스크톱 세션이 핸드오프 받음 (2026-09-25):** 이 브랜치를 fast-forward, `npm install`, Remotion 패키지 버전을 전부 `4.0.524`로 고정(애드온만 4.0.528로 풀려 버전 불일치 경고가 나던 것 해결), 스토리보드 3D 렌더가 mac에서 클라우드와 같은 그림으로 나오는 것 확인(`REMOTION_GL=angle` 필요 — §7). 로컬은 ElevenLabs 접속 가능 + 3D 렌더가 훨씬 빠르므로 **사운드 생성과 최종 렌더는 로컬 권장.**
 
 ---
 
@@ -260,6 +261,9 @@ node scripts/prep.mjs alcohol --reuse   # VO 유지, timeline만
 
 # 브라우저 (auto-content 번들 재사용 가능, mac)
 export REMOTION_BROWSER="$HOME/dev/instagram/auto-content/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell"
+# 3D(three.js — 스토리보드, 이후 술 편 장면)는 mac에서 ANGLE 필수. 기본 GL은 "Error creating WebGL context"로 실패함.
+export REMOTION_GL=angle   # scripts/storyboard.mjs가 이 값을 읽음. `npx remotion render|still`에는 --gl=angle
+# mac + ANGLE 실측(2026-09-25): 스토리보드 프레임당 1–3초 → 32초(960프레임) 전체 ≈ 15–50분. 클라우드 소프트웨어 GL(3–20초)보다 훨씬 빠름
 # 클라우드 세션(Linux)에서 쓴 경로 — 풀 chrome 바이너리는 안 됨, 반드시 headless_shell:
 # export REMOTION_BROWSER="/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
 # mp4 렌더(remotion render)는 ffmpeg 필요 — 없으면: apt-get update && apt-get install -y ffmpeg
