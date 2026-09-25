@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
-from vd_engine import GOLD, H, W, cover, load_font, load_font_regular
+from vd_engine import GOLD, H, W, cover, load_font, load_font_regular, wrap_chars
 
 ROOT = Path(__file__).resolve().parent
 
@@ -261,6 +261,8 @@ def make_artist_mockup_real(painting: Image.Image, bg_photo_path: str):
     img = Image.new("RGB", (W, H), (176, 158, 130))
     img.paste(left, (-40, 0)); img.paste(right, (760, 0))
     d = ImageDraw.Draw(img)
+    d.ellipse((360, 10, 560, 90), fill=(200, 192, 176))                            # 구름 — 위쪽 빈 하늘의 텍스트 환각 방지
+    d.ellipse((520, 0, 740, 70), fill=(195, 187, 170))
     d.rectangle((0, H - 140, W, H), fill=(96, 88, 76))                             # 자갈길 바닥 톤(하단 현대 요소 가림)
     skin, robe = (196, 168, 140), (58, 30, 30)
     d.ellipse((452, 90, 628, 340), fill=skin)
@@ -268,12 +270,12 @@ def make_artist_mockup_real(painting: Image.Image, bg_photo_path: str):
     d.line((540, 225, 532, 260), fill=(150, 120, 100), width=4)
     d.arc((505, 275, 575, 305), 20, 160, fill=(110, 70, 65), width=5)
     d.line((470, 195, 510, 185), fill=(90, 65, 55), width=4); d.line((610, 195, 570, 185), fill=(90, 65, 55), width=4)
-    d.polygon([(390, 430), (690, 430), (760, 1920), (320, 1920)], fill=robe)
-    d.polygon([(405, 470), (330, 890), (425, 1390), (490, 890)], fill=robe)
-    d.polygon([(675, 470), (750, 890), (655, 1390), (595, 890)], fill=robe)
+    d.polygon([(400, 300), (700, 300), (780, 1920), (300, 1920)], fill=robe)        # 목 바로 아래부터 로브(빈 배경 갭 없음)
+    d.polygon([(415, 340), (330, 890), (425, 1390), (490, 890)], fill=robe)
+    d.polygon([(685, 340), (750, 890), (655, 1390), (595, 890)], fill=robe)
     pw = 600
     ph = round(pw * painting.height / painting.width)
-    px, py = (W - pw) // 2, 700
+    px, py = (W - pw) // 2, 650
     d.rectangle((px - 24, py - 24, px + pw + 24, py + ph + 24), fill=(40, 26, 16))
     img.paste(cover(painting, pw, ph), (px, py))
     d.ellipse((px - 44, py + ph - 66, px + 16, py + ph + 24), fill=skin)
@@ -325,6 +327,50 @@ def make_photoreal(style: str, painting: Image.Image, strength: float = 0.6, pro
         bg.paste((10, 8, 8), (fx - 45, fy - 45), shadow)
     bg.paste(frame, (fx, fy))
     return bg
+
+
+# ───────────────────────── lens: 돋보기 썸네일 (실제 그림만 사용, API 비용 없음, 항상 같은 결과) ─────────────────────────
+SAFE_TOP, SAFE_H = 240, 1440   # 인스타 피드 격자가 보여주는 가운데 3:4 안전 영역(1080x1440) — 렌즈·문구는 이 안에
+
+
+def lens_crop(painting: Image.Image, fx: float, fy: float, zoom: float, size: int) -> Image.Image:
+    """painting의 (fx,fy) 정규좌표를 중심으로 zoom배 확대한 정사각형을 size로 리사이즈."""
+    side = min(painting.width, painting.height) / zoom
+    cx, cy = fx * painting.width, fy * painting.height
+    x0 = min(max(cx - side / 2, 0), painting.width - side)
+    y0 = min(max(cy - side / 2, 0), painting.height - side)
+    return painting.crop((int(x0), int(y0), int(x0 + side), int(y0 + side))).resize((size, size), Image.Resampling.LANCZOS)
+
+
+def make_lens(painting: Image.Image, fx: float, fy: float, zoom: float, caption: str = "",
+              lens_content: Image.Image | None = None, cx: int = 540, cy: int = 780, r: int = 320) -> Image.Image:
+    """전체 그림을 어둡게 깔고, 금테 원형 렌즈 안에 디테일을 확대해서 보여준다. lens_content를 주면 그걸 원 안에 쓴다(해골 등)."""
+    bg = cover(painting, W, H)
+    arr = np.asarray(bg, dtype=np.float32) * 0.5
+    canvas = Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
+    content = lens_content or lens_crop(painting, fx, fy, zoom, r * 2)
+    if content.size != (r * 2, r * 2):
+        content = content.resize((r * 2, r * 2), Image.Resampling.LANCZOS)
+    mask = Image.new("L", (r * 2, r * 2), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, r * 2 - 1, r * 2 - 1), fill=255)
+    shadow = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(shadow).ellipse((cx - r - 14, cy - r - 6, cx + r + 14, cy + r + 26), fill=130)
+    shadow = shadow.filter(ImageFilter.GaussianBlur(24))
+    canvas.paste((6, 5, 4), (0, 0), shadow)
+    canvas.paste(content, (cx - r, cy - r), mask)
+    d = ImageDraw.Draw(canvas)
+    for i, w in enumerate((10, 4)):
+        col = (86, 62, 28) if i == 0 else GOLD
+        d.ellipse((cx - r - (10 - i * 4), cy - r - (10 - i * 4), cx + r + (10 - i * 4), cy + r + (10 - i * 4)), outline=col, width=w)
+    if caption:
+        font = load_font(64)
+        lines = wrap_chars(caption, 12)
+        lh = 84
+        ty = SAFE_TOP + SAFE_H - 70 - lh * len(lines)
+        for i, line in enumerate(lines):
+            tw = d.textbbox((0, 0), line, font=font, stroke_width=8)[2]
+            d.text(((W - tw) / 2, ty + i * lh), line, font=font, fill=(255, 255, 255), stroke_width=8, stroke_fill=(0, 0, 0))
+    return canvas
 
 
 def main() -> None:
