@@ -1,0 +1,8 @@
+anthropic
+elevenlabs
+fal-client
+moviepy
+pillow
+numpy
+imageio-ffmpeg
+python-dotenv

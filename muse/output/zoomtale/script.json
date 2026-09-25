@@ -1,0 +1,110 @@
+{
+  "provider": {
+    "provider": "fallback_builtin"
+  },
+  "script": {
+    "title": "꽃 한 송이에 집 한 채를 건 사람들",
+    "topic": "돈의 강과 집단 광기가 불러온 역사상 가장 비극적인 버블",
+    "hook_question": "이 원숭이들은 왜, 꽃 한 송이에 집 한 채를 걸었을까요?",
+    "scenes": [
+      {
+        "id": 1,
+        "phase": "hook",
+        "narration": "이 원숭이들은 왜, 꽃 한 송이에 집 한 채를 걸었을까요?",
+        "subtitle": "꽃 한 송이 = 집 한 채?",
+        "wikimedia_query": "Jan Brueghel the Younger Satire on Tulip Mania",
+        "flux_prompt": "17th century Flemish oil painting of monkeys in noble dress trading tulip bulbs, dark tavern",
+        "focus_x": 0.4,
+        "focus_y": 0.8,
+        "zoom": "in",
+        "reuse_hook_image": false
+      },
+      {
+        "id": 2,
+        "phase": "body",
+        "narration": "1636년 네덜란드. 돈이 강물처럼 넘쳤습니다.",
+        "subtitle": "1636년, 네덜란드",
+        "wikimedia_query": "Gerrit Berckheyde Dam Square Amsterdam painting",
+        "flux_prompt": "Amsterdam canal harbor 17th century, merchant ships, gold coins, dark painterly light",
+        "focus_x": 0.5,
+        "focus_y": 0.6,
+        "zoom": "out",
+        "reuse_hook_image": false
+      },
+      {
+        "id": 3,
+        "phase": "body",
+        "narration": "튤립 구근 하나가, 숙련공 연봉의 열 배에 팔렸죠.",
+        "subtitle": "구근 하나 = 연봉 10배",
+        "wikimedia_query": "Semper Augustus tulip watercolor 17th century",
+        "flux_prompt": "single red and white striped tulip on black velvet, 17th century still life, dramatic light",
+        "focus_x": 0.5,
+        "focus_y": 0.35,
+        "zoom": "in",
+        "reuse_hook_image": false
+      },
+      {
+        "id": 4,
+        "phase": "body",
+        "narration": "사람들은 꽃이 아니라, '내일의 가격'을 샀습니다.",
+        "subtitle": "꽃이 아닌 '내일'을 샀다",
+        "wikimedia_query": "Hendrik Pot Flora's Wagon of Fools",
+        "flux_prompt": "crowd of 17th century Dutch merchants shouting in a tavern auction, candle light, oil painting",
+        "focus_x": 0.5,
+        "focus_y": 0.5,
+        "zoom": "in",
+        "reuse_hook_image": false
+      },
+      {
+        "id": 5,
+        "phase": "body",
+        "narration": "1637년 2월 3일, 경매장에서 아무도 손을 들지 않았습니다.",
+        "subtitle": "1637년 2월 3일, 침묵",
+        "wikimedia_query": "Haarlem Grote Markt 17th century painting Berckheyde",
+        "flux_prompt": "empty 17th century Dutch auction hall, overturned chairs, single candle, dark oil painting",
+        "focus_x": 0.5,
+        "focus_y": 0.55,
+        "zoom": "out",
+        "reuse_hook_image": false
+      },
+      {
+        "id": 6,
+        "phase": "cliffhanger",
+        "narration": "며칠 만에, 가격은 99% 증발했습니다.",
+        "subtitle": "며칠 만에 -99%",
+        "wikimedia_query": "Vanitas still life skull wilted flowers 17th century painting",
+        "flux_prompt": "wilted dead tulips on a wooden table, torn promissory notes, 17th century vanitas painting",
+        "focus_x": 0.75,
+        "focus_y": 0.4,
+        "zoom": "in",
+        "reuse_hook_image": false
+      },
+      {
+        "id": 7,
+        "phase": "reveal",
+        "narration": "원숭이는 그들이 아니라, 우리의 초상이었습니다.",
+        "subtitle": "원숭이는 우리였다",
+        "wikimedia_query": "Jan Brueghel the Younger Satire on Tulip Mania",
+        "flux_prompt": "17th century Flemish oil painting of monkeys in noble dress trading tulip bulbs, dark tavern",
+        "focus_x": 0.4,
+        "focus_y": 0.8,
+        "zoom": "out",
+        "reuse_hook_image": true
+      },
+      {
+        "id": 8,
+        "phase": "loop_cta",
+        "narration": "400년이 지난 지금, 같은 그림이 다시 그려지고 있습니다. 이 자본의 함정을 피하려면, 이 영상의 패턴을 저장해두세요.",
+        "subtitle": "같은 그림이 다시",
+        "wikimedia_query": "Jan Brueghel the Younger Satire on Tulip Mania",
+        "flux_prompt": "17th century Flemish oil painting of monkeys in noble dress trading tulip bulbs, dark tavern",
+        "focus_x": 0.4,
+        "focus_y": 0.8,
+        "zoom": "in",
+        "reuse_hook_image": true
+      }
+    ],
+    "cta_text": "이 자본의 함정을 피하려면 이 영상의 패턴을 저장해두세요",
+    "loop_rationale": "마지막 문장 '같은 그림이 다시 그려지고 있습니다'가 첫 문장 '이 원숭이들은 왜…'의 '그림'으로 되돌아간다."
+  }
+}

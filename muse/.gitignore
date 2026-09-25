@@ -1,0 +1,6 @@
+.venv/
+.env
+output/**/*.mp4
+output/**/*.wav
+output/**/assets/
+__pycache__/

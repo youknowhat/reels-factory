@@ -1,0 +1,102 @@
+{
+ "fetchedAt": "2026-09-25",
+ "memberStateNote": "UN 회원국 193개국 기준으로 걸러 순위를 다시 매겼습니다 (홍콩·마카오·푸에르토리코 등 속령·SAR 제외).",
+ "perCapita": {
+  "label": "1인당 알코올 소비 (15세+, L/년)",
+  "variable": "undata/sdg/SH_ALC_CONSPT.AGE--Y_GE15",
+  "date": "2020",
+  "source": "https://unstats.un.org/sdgs/dataportal",
+  "n": 188,
+  "korea": {
+   "rank": 46,
+   "value": 8.46673057468372,
+   "date": "2020"
+  },
+  "top5": [
+   {
+    "iso3": "ROU",
+    "name": "Romania",
+    "value": 16.9320514774369,
+    "date": "2020"
+   },
+   {
+    "iso3": "LVA",
+    "name": "Latvia",
+    "value": 14.6860566691505,
+    "date": "2020"
+   },
+   {
+    "iso3": "GEO",
+    "name": "Georgia",
+    "value": 14.5761335444207,
+    "date": "2020"
+   },
+   {
+    "iso3": "CZE",
+    "name": "Czech Republic",
+    "value": 13.820742296286,
+    "date": "2020"
+   },
+   {
+    "iso3": "BGR",
+    "name": "Bulgaria",
+    "value": 13.0195937106024,
+    "date": "2020"
+   }
+  ]
+ },
+ "heavy": {
+  "label": "폭음 비율, 전체 성인 (지난 30일, %)",
+  "variable": "undata/who/ALCO_HEAVY_E.AGE--Y_GE15__REF_PER_CD--LAST30DAYS",
+  "date": "2020",
+  "source": "https://www.who.int/data",
+  "n": 185,
+  "korea": {
+   "rank": 3,
+   "value": 45.1513301,
+   "date": "2020"
+  },
+  "top5": [
+   {
+    "iso3": "LUX",
+    "name": "Luxembourg",
+    "value": 48.0491983,
+    "date": "2020"
+   },
+   {
+    "iso3": "IRL",
+    "name": "Ireland",
+    "value": 45.7687391,
+    "date": "2020"
+   },
+   {
+    "iso3": "KOR",
+    "name": "South Korea",
+    "value": 45.1513301,
+    "date": "2020"
+   },
+   {
+    "iso3": "COG",
+    "name": "Congo [Republic]",
+    "value": 43.8920244,
+    "date": "2020"
+   },
+   {
+    "iso3": "GNQ",
+    "name": "Equatorial Guinea",
+    "value": 43.8539534,
+    "date": "2020"
+   }
+  ]
+ },
+ "analogy": {
+  "soju": {
+   "abvPct": 15.7,
+   "mL": 360,
+   "densityGPerMl": 0.789
+  },
+  "sojuGrams": 44.6,
+  "heavyThresholdG": 60,
+  "bottlesPerHeavySession": 1.35
+ }
+}

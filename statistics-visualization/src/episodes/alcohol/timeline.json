@@ -1,0 +1,101 @@
+{
+ "fps": 30,
+ "width": 1080,
+ "height": 1920,
+ "total": 390,
+ "voiceDir": "vo/alcohol",
+ "voice": "elevenlabs:eleven_v3",
+ "scenes": [
+  {
+   "id": "hook",
+   "from": 0,
+   "dur": 78,
+   "phrases": [
+    {
+     "from": 4,
+     "dur": 68,
+     "trim": 0,
+     "rate": 1.12,
+     "sub": [
+      "한국인 술 소비,",
+      "세계 몇 위일까요?"
+     ],
+     "audio": "s1-1.mp3"
+    }
+   ]
+  },
+  {
+   "id": "reveal1",
+   "from": 78,
+   "dur": 147,
+   "phrases": [
+    {
+     "from": 4,
+     "dur": 87,
+     "trim": 0,
+     "rate": 1.12,
+     "sub": [
+      "UN 회원국 188곳 중",
+      "**46위**."
+     ],
+     "audio": "s2-1.mp3"
+    },
+    {
+     "from": 94,
+     "dur": 43,
+     "trim": 0,
+     "rate": 1.12,
+     "sub": [
+      "생각보다 한참 아래죠."
+     ],
+     "audio": "s2-2.mp3"
+    }
+   ]
+  },
+  {
+   "id": "pivot",
+   "from": 225,
+   "dur": 33,
+   "phrases": [
+    {
+     "from": 6,
+     "dur": 19,
+     "trim": 0,
+     "rate": 1.12,
+     "sub": [
+      "근데—"
+     ],
+     "audio": "s3-1.mp3"
+    }
+   ]
+  },
+  {
+   "id": "reveal2",
+   "from": 258,
+   "dur": 132,
+   "phrases": [
+    {
+     "from": 4,
+     "dur": 58,
+     "trim": 0,
+     "rate": 1.12,
+     "sub": [
+      "한 번에 몰아 마시는",
+      "'폭음'으로 보면,"
+     ],
+     "audio": "s4-1.mp3"
+    },
+    {
+     "from": 65,
+     "dur": 53,
+     "trim": 7,
+     "rate": 1.12,
+     "sub": [
+      "185개국 중 **3위**예요."
+     ],
+     "audio": "s4-2.mp3"
+    }
+   ]
+  }
+ ]
+}

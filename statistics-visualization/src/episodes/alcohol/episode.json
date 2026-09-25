@@ -1,0 +1,18 @@
+{
+  "id": "ep02-alcohol-compare",
+  "title": "한국에 대한 착각 #1 · 술 (스타일 비교용, 도입~반전2)",
+  "model": "eleven_v3",
+  "_note": "sub: on-screen subtitle (**word** = highlighted). tts: what the voice reads — numbers spelled out in Korean; [tags] are eleven_v3 audio tags and are stripped for other models. This is the ~16s comparison segment shared by all three visual styles (A/B/C) — one narration, three renderers.",
+  "scenes": [
+    { "id": "hook", "lead": 4, "tail": 6, "phrases": [
+      { "sub": ["한국인 술 소비,", "세계 몇 위일까요?"], "tts": "한국인 술 소비, 세계 몇 위일까요?" } ] },
+    { "id": "reveal1", "lead": 4, "tail": 10, "phrases": [
+      { "sub": ["UN 회원국 188곳 중", "**46위**."], "tts": "유엔 회원국 백팔십팔 곳 중, 사십육 위." },
+      { "sub": ["생각보다 한참 아래죠."], "tts": "생각보다 한참 아래죠." } ] },
+    { "id": "pivot", "lead": 6, "tail": 8, "phrases": [
+      { "sub": ["근데—"], "tts": "근데 —" } ] },
+    { "id": "reveal2", "lead": 4, "tail": 14, "phrases": [
+      { "sub": ["한 번에 몰아 마시는", "'폭음'으로 보면,"], "tts": "한 번에 몰아 마시는, 폭음으로 보면," },
+      { "sub": ["185개국 중 **3위**예요."], "tts": "[surprised] 백팔십오 개국 중, 삼 위예요." } ] }
+  ]
+}
