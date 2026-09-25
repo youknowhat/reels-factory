@@ -12,11 +12,19 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const browserExecutable = process.env.REMOTION_BROWSER || undefined;
 const [id, ...rest] = process.argv.slice(2);
 if (!id) throw new Error("usage: node scripts/stills.mjs <CompositionId> [frame ...]  (id = as registered in src/Root.tsx)");
-const episode = id.toLowerCase();
-const timelinePath = path.join(ROOT, "src/episodes", episode, "timeline.json");
+let episode = id.toLowerCase();
+let timelinePath = path.join(ROOT, "src/episodes", episode, "timeline.json");
+if (!fs.existsSync(timelinePath)) {
+  // A/B/C style variants (e.g. "Alcohol-A") share one timeline.json under the base episode folder.
+  const base = episode.replace(/-[a-z]$/, "");
+  const basePath = path.join(ROOT, "src/episodes", base, "timeline.json");
+  if (fs.existsSync(basePath)) [episode, timelinePath] = [base, basePath];
+}
 const serveUrl = await bundle({ entryPoint: path.join(ROOT, "src/index.ts") });
 const composition = await selectComposition({ serveUrl, id, browserExecutable });
-const outDir = path.join(ROOT, "out/stills", episode);
+// Keyed by the composition id (not the possibly-shared episode folder), so style variants like
+// Alcohol-A/-B/-C land in their own out/stills/ subfolder instead of overwriting each other.
+const outDir = path.join(ROOT, "out/stills", id.toLowerCase());
 fs.mkdirSync(outDir, { recursive: true });
 const frames = rest.length
   ? rest.map(Number)

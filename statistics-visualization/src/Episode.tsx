@@ -5,7 +5,7 @@ import { Canvas, Cue, SceneT, Txt } from "./lib";
 import { C, L } from "./tokens";
 
 type PhraseT = SceneT["phrases"][number] & { trim?: number; rate?: number };
-type SceneWithPhrases = SceneT & { phrases: PhraseT[] };
+type SceneWithPhrases = Omit<SceneT, "phrases"> & { phrases: PhraseT[] };
 export type Timeline = { fps: number; width: number; height: number; total: number; voiceDir: string; scenes: SceneWithPhrases[] };
 
 export type EpisodeDef = {

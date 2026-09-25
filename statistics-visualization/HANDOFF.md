@@ -1,7 +1,7 @@
-# statistics-visualization — 세션 핸드오프 (2026-09-25)
+# statistics-visualization — 세션 핸드오프 (2026-09-25, 클라우드 세션 업데이트)
 
 > **다른 Claude/Cursor 세션에서 이렇게 시작하세요:**  
-> `~/dev/reels-factory/statistics-visualization/HANDOFF.md`를 읽고, 아래 **「활성 계획」**부터 **구현 단계 5번**을 이어서 진행해. 사용자가 "이대로 진행해"라고만 해도 바로 작업 시작.
+> `~/dev/reels-factory/statistics-visualization/HANDOFF.md`를 읽고, 아래 **「활성 계획」**과 **구현 체크리스트**를 확인해. **4·5·6·9(비교 렌더)단계는 클라우드 세션(`claude/gallant-hopper-qbrotr`)에서 완료** — A/B/C 3종 16초 mp4를 만들어 사용자에게 전달함, **스타일 선택 대기 중**. 사용자가 스타일을 고르면 그 스타일만 남기고 정리한 뒤 35초 전체 확장으로 진행.
 
 ---
 
@@ -87,8 +87,7 @@ UN 0.75 전망·230위 퀴즈·차드 8배·손주 14명·투표 엔딩 — 사�
 
 **목표:** 술 편 **도입~반전2 (~16초)** 를 **비주얼 A/B/C 3종**으로 렌더 → 사용자 선택 → **전체 ~35초** 완성 + 캡션.
 
-**중단 지점:** 계획서 **구현 단계 1~4는 대부분 완료**, **5단계(소품)부터 미착수**.  
-나레이션(16초 구간)과 `data.json`은 있음. **화면(scenes) 없음.**
+**중단 지점 (2026-09-25 클라우드 세션 완료분):** 구현 단계 **1~6, 8 완료**. A/B/C 3종 16초 mp4 렌더 완료, 사용자에게 전달함 — **사용자의 스타일 선택 대기 중**. 다음 세션은 사용자가 고른 스타일(A/B/C 중 하나)만 남기고 `src/episodes/alcohol/scenes-<나머지 두 글자>.tsx`와 `Root.tsx`의 해당 `Alcohol-*` Composition 2개를 정리한 뒤, 그 스타일로 **전체 35초** 대본(비유·결론·댓글 유도 장면 추가) 확장부터 시작.
 
 ### 2.1 술 편 스토리 (전체 ~35초, 초안)
 
@@ -144,18 +143,26 @@ UN 0.75 전망·230위 퀴즈·차드 8배·손주 14명·투표 엔딩 — 사�
 
 | # | 내용 | 상태 |
 |---|------|------|
-| 1 | `episodes/fertility/`, `episodes/alcohol/`, 공용 `Episode.tsx`, `lib.tsx`, `prep.mjs <ep>`, `stills.mjs <CompositionId>` | **완료** (Root는 아직 `Fertility`만 등록) |
+| 1 | `episodes/fertility/`, `episodes/alcohol/`, 공용 `Episode.tsx`, `lib.tsx`, `prep.mjs <ep>`, `stills.mjs <CompositionId>` | **완료** (Root에 `Fertility` + `Alcohol-A/B/C` 등록됨) |
 | 2 | `scripts/undata.alcohol.mjs` + `lib/undata-client.mjs`, `un-members.mjs` → `alcohol/data.json` | **완료** |
 | 3 | `tokens.ts` 무채색·Pin/Dot/Hatch, fertility scenes 반영 | **완료** |
-| 4 | `src/motion/` (Camera, Cutout, PaperTexture, pop) | **미착수** |
-| 5 | `src/props/` SVG (소주병, 캔, 잔, 사람, 포스트잇, 도장) | **미착수** |
-| 6 | `alcohol-A`, `alcohol-B`, `alcohol-C` compositions + scenes | **미착수** |
-| 7 | sfx/music 스크립트 | **미착수** (일부 `public/sfx/` tick/tok/slap은 fertility용 존재) |
+| 4 | `src/motion/` (Camera, Cutout, PaperTexture, pop) | **완료** (`pop`은 기존 `lib.tsx` 재사용, 새로 안 만듦) |
+| 5 | `src/props/` SVG (소주병, 캔, 잔, 사람, 포스트잇, 도장) | **완료** |
+| 6 | `alcohol-A`, `alcohol-B`, `alcohol-C` compositions + scenes | **완료** — A=종이콜라주+연속카메라, B=3D 병차트(`@remotion/three`), C=발전형(기존 fertility 문법+새 모션만) |
+| 7 | sfx/music 스크립트 | **미착수** (기존 `public/sfx/` tick/tok/slap 재사용 중, 전용 사운드 없음) |
 | 8 | alcohol compare 나레이션 v3 | **완료** (`--reuse`로 재생성 방지) |
-| 9 | A/B/C 16s 렌더 → 선택 → 35s 전체 + 캡션 | **미착수** |
+| 9 | A/B/C 16s 렌더 → 선택 → 35s 전체 + 캡션 | **16s 렌더·전달 완료** (`out/alcohol-{a,b,c}.mp4`, gitignore라 로컬엔 없음 — 사용자에게 파일로 전달됨), **사용자 선택 대기**. 35s 확장은 미착수 |
 | 10 | 브랜드 아티팩트 동기화 | **파일럿 승인 후** |
 
-**다음 세션 첫 작업:** **5→6→9 순** (소품 → A/B/C 장면 → stills → 짧은 mp4 3개 사용자 전달).
+**다음 세션 첫 작업:** 사용자가 A/B/C 중 하나를 고르면 — (1) 나머지 두 스타일의 `scenes-*.tsx` + `Root.tsx`의 `Alcohol-*` Composition 2개 삭제, (2) 고른 스타일로 **35초 전체 대본** 확장 (§2.1 표의 비유·결론·댓글유도 장면 추가, `episode.json` 확장 후 `prep.mjs alcohol` 재실행 — 기존 hook~reveal2 VO는 유지되도록 `--reuse` 우선 시도), (3) 7단계 sfx/music 스크립트, (4) 최종 렌더.
+
+**구현 메모 (다음 세션이 막힐 만한 것들):**
+- 이 컨테이너엔 `ffmpeg`이 기본 미설치 — `apt-get update && apt-get install -y ffmpeg` 필요(첫 `apt-get install`이 `libva2` 등 일부 404로 실패하면 `apt-get update` 먼저 재실행 후 재시도하면 해결됨). `remotion render`(mp4)는 ffmpeg 필수, `stills.mjs`(png)는 불필요.
+- 브라우저: `/opt/pw-browsers/chromium-1194/...`의 **풀 `chrome` 바이너리는 실패**함("Old Headless mode has been removed"). `REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` 사용.
+- `@remotion/three` 추가 시 `@react-three/fiber`가 `@types/react@19`를 끌어와서 `<mesh>`/`<group>` 등 JSX 타입이 전부 깨짐(React 19 타입의 JSX 네임스페이스 변경 때문) — `package.json`에 `"@types/react": "^18.3.12"`를 **직접 고정**해서 해결함(react 런타임은 계속 18.3.1). `@types/three`도 별도 설치 필요(`three@0.169`는 타입을 자체 번들 안 함).
+- `Episode.tsx`의 `SceneWithPhrases = SceneT & {phrases: PhraseT[]}`가 교차타입 충돌로 `tsc` 에러 냄 — `Omit<SceneT,"phrases"> & {...}`로 수정함(런타임 영향 없음).
+- `scripts/stills.mjs`는 `<CompositionId>`를 그대로 폴더명으로 써서 A/B/C가 서로 덮어쓸 뻔함 — timeline.json 위치는 `-a/-b/-c` 접미사를 뗀 공용 `alcohol/` 폴더에서 찾되, PNG 출력 폴더는 원래 id(`alcohol-a` 등)로 분리하도록 고쳐놓음.
+- Episode.tsx가 각 phrase의 **자막을 y≈1372~1436에 이미 자동으로 그림** — 씬 컴포넌트에서 같은 문장을 또 Tape로 하단에 그리면 겹침. A/B/C 전부 그 중복 Tape는 뺐음; 새 장면 만들 때 하단 텍스트는 자막에 맡기고 씬 자체는 y<1400 안에서만 그릴 것(잉크 띠 bandY=1500이 그 아래를 덮어버림).
 
 ---
 
@@ -167,11 +174,13 @@ statistics-visualization/
 ├── README.md                  ← prep/stills/render 요약 (ep01 경로는 구식, fertility/alcohol 사용)
 ├── .env                       ← gitignore. ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID (채팅에 올리지 말 것)
 ├── src/
-│   ├── Root.tsx               ← Composition 등록 (TODO: alcohol-A/B/C)
-│   ├── Episode.tsx            ← timeline + scenes/cues 주입형 플레이어
+│   ├── Root.tsx               ← Composition 등록: Fertility, Alcohol-A/B/C
+│   ├── Episode.tsx            ← timeline + scenes/cues 주입형 플레이어 (2D 전용 — B는 별도 ThreeCanvas 레이어)
 │   ├── lib.tsx                ← Canvas, Txt, Stamp, Tape, Dot, Pin, Hatch, prog, pop, …
 │   ├── tokens.ts              ← C.* 색, L.bandY=1500 잉크 띠, T.* 타이포
 │   ├── fonts.ts
+│   ├── props/index.tsx        ← SojuBottle, Can, Glass, Person, PostIt, InkStamp (cutout SVG, 주로 A용)
+│   ├── motion/index.tsx       ← Camera(씬 간 연속 카메라 핸드오프), Cutout(정지모션 지터), PaperTexture(그레인)
 │   └── episodes/
 │       ├── fertility/
 │       │   ├── episode.json   ← v2 대본 (eleven_v3)
@@ -179,15 +188,20 @@ statistics-visualization/
 │       │   ├── scenes.tsx, index.tsx, data.ts, tfr_*.json
 │       └── alcohol/
 │           ├── episode.json   ← 16s compare 대본만
-│           ├── timeline.json
-│           └── data.json
+│           ├── timeline.json  ← total 390f = 13.0s, A/B/C 공유
+│           ├── data.json, data.ts  ← PER_CAPITA(46/188), HEAVY(3/185), ANALOGY
+│           ├── scenes-a.tsx   ← 종이콜라주: Ruler(rank1↔188 mirror로 반전 연출) + SojuBottle + 연속 Camera
+│           ├── scenes-b.tsx   ← 3D: `@remotion/three`, 병 높이=실제 값(barH), 2D 타이포는 별도 오버레이
+│           ├── scenes-c.tsx   ← 발전형: fertility의 Strip/Pin 래더 패턴 재사용 + Camera 푸시인만 추가
+│           └── index.tsx      ← AlcoholAEpisode/BEpisode/CEpisode, 셋 다 같은 timeline.json
 ├── public/vo/fertility/       ← mp3+json
 ├── public/vo/alcohol/         ← s1-1 … s4-2 mp3+json
 ├── scripts/
 │   ├── prep.mjs               ← node scripts/prep.mjs fertility|alcohol [--reuse]
-│   ├── stills.mjs             ← node scripts/stills.mjs Fertility [frames…]
+│   ├── stills.mjs             ← node scripts/stills.mjs Fertility|Alcohol-A|... [frames…] (출력 폴더는 id 기준)
 │   └── undata.alcohol.mjs
-└── package.json               ← remotion 4.0.524, motion-blur, noise, paths, transitions
+└── package.json               ← remotion 4.0.524, motion-blur, noise, paths, transitions, + @remotion/three,
+                                  three, @react-three/fiber, @types/three, @types/react(18로 고정 — 구현 메모 참고)
 ```
 
 ### 4.1 fertility 편 (출산율 v2)
@@ -199,9 +213,10 @@ statistics-visualization/
 
 ### 4.2 alcohol 편
 
-- **`scenes.tsx` / `index.tsx` 없음** — **만들어야 함**  
-- **`Root.tsx`에 A/B/C 미등록** — 계획대로 추가  
-- **전체 35초 `episode.json` 확장** — 스타일 선택 **후** (비유·결론·댓글 장면 추가 + prep 재실행)
+- **`scenes-a.tsx` / `scenes-b.tsx` / `scenes-c.tsx` + `index.tsx`** — 2026-09-25 클라우드 세션에서 작성, 4장면(hook/reveal1/pivot/reveal2) 모두 구현됨  
+- **`Root.tsx`에 `Alcohol-A`/`Alcohol-B`/`Alcohol-C` 등록 완료**  
+- **16초 비교 렌더** `out/alcohol-a.mp4` / `-b.mp4` / `-c.mp4` (`out/`은 gitignore — 로컬엔 없음, 사용자에게 파일로 전달됨)  
+- **전체 35초 `episode.json` 확장** — 스타일 선택 **후** (비유·결론·댓글 장면 추가 + prep 재실행), 아직 미착수
 
 ---
 
@@ -242,14 +257,17 @@ node scripts/prep.mjs fertility
 node scripts/prep.mjs alcohol
 node scripts/prep.mjs alcohol --reuse   # VO 유지, timeline만
 
-# 브라우저 (auto-content 번들 재사용 가능)
+# 브라우저 (auto-content 번들 재사용 가능, mac)
 export REMOTION_BROWSER="$HOME/dev/instagram/auto-content/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell"
+# 클라우드 세션(Linux)에서 쓴 경로 — 풀 chrome 바이너리는 안 됨, 반드시 headless_shell:
+# export REMOTION_BROWSER="/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
+# mp4 렌더(remotion render)는 ffmpeg 필요 — 없으면: apt-get update && apt-get install -y ffmpeg
 
 node scripts/stills.mjs Fertility
-node scripts/stills.mjs Alcohol-A   # 등록 후
+node scripts/stills.mjs Alcohol-A   # 등록 후 — Alcohol-B, Alcohol-C도 동일
 
 npm run studio
-npm run render -- --browser-executable="$REMOTION_BROWSER"
+npx remotion render Alcohol-A out/alcohol-a.mp4 --browser-executable="$REMOTION_BROWSER"
 ```
 
 **검증:**
@@ -286,21 +304,27 @@ Factfulness 무지 테스트, NYT You Draw It, Mona Chalabi 비유, Kurzgesagt S
 | | **결과물만 보고 종료** |
 | | **reels-factory 클라oud 이어하기** — 코드 원격 + 계획 전달 |
 | | (한도) session limit — Git push로 `claude/gallant-hopper-qbrotr` |
+| | **클라우드 세션 진행**: 4·5·6단계 구현 + A/B/C 16초 mp4 렌더 완료, 사용자에게 파일 전달, 스타일 선택 요청 중 |
 
 ---
 
 ## 10. 새 세션용 프롬프트 (복붙)
 
+**스타일 선택 전 (지금):** 사용자가 A/B/C 중 어느 쪽인지 아직 답하지 않았다면, 새 세션은 먼저 `out/alcohol-{a,b,c}.mp4`(로컬에 없으면 위 렌더 명령으로 재생성)를 사용자에게 보여주고 선택부터 받을 것 — 임의로 하나를 골라 진행하지 말 것.
+
+**스타일 선택 후:**
 ```
 프로젝트: ~/dev/reels-factory/statistics-visualization
-HANDOFF.md와 ~/.claude/plans/cryptic-foraging-corbato.md를 읽었어.
+HANDOFF.md를 읽었어. A/B/C 중 <사용자가 고른 스타일>로 확정.
 
-「한국에 대한 착각」술 편 파일럿을 계속해.
-구현 단계 5번(src/props/)부터: 소품 SVG → src/motion/ → alcohol-A/B/C Remotion composition과 16초 compare 장면 구현 → stills 3종 → 짧은 mp4 3개 비교용 렌더.
+1. src/episodes/alcohol/scenes-<나머지 두 스타일 글자>.tsx 삭제, Root.tsx에서 해당 Alcohol-* Composition 2개 제거.
+2. <고른 스타일>로 전체 35초 episode.json 확장: §2.1 표의 비유(소주 1.35병)·결론(착각 도장)·댓글유도 장면 추가.
+   나레이션은 hook~reveal2 구간 public/vo/alcohol/ 재사용(prep --reuse 우선 시도), 새 장면만 신규 생성.
+3. 7단계 sfx/music 스크립트 작성.
+4. 최종 stills + mp4 렌더.
 
-확정 데이터는 src/episodes/alcohol/data.json, 나레이션은 public/vo/alcohol/ 재사용(prep --reuse).
 한국은 색이 아니라 Pin/Dot, 하단 잉크 띠 유지, 세리프 금지.
-완료 후 전체 35초 episode.json 확장은 내가 스타일 고른 뒤.
+씬 자체 텍스트는 y<1400에서만 그릴 것 — 자막이 이미 y≈1372~1436을 씀 (겹침 주의, HANDOFF §3 구현 메모 참고).
 
 이대로 진행해.
 ```
@@ -310,7 +334,6 @@ HANDOFF.md와 ~/.claude/plans/cryptic-foraging-corbato.md를 읽었어.
 ## 11. 알려진 갭·주의
 
 - `README.md`의 `src/episode.json`, `out/ep01-fertility.mp4` 경로는 **구조 리팩 전** 설명 — `episodes/fertility/` 기준으로 작업.  
-- `Root.tsx`에 **alcohol 컴position 없음** — 추가 필요.  
 - 계획서의 **형광 연두 강조** vs **현 tokens.ts 전무채색** — C 스타일 또는 palette 검증 후 연두 도입 여부 사용자에게 확인 가능.  
 - `out/`·`.env`는 gitignore — 클론 후 `.env`와 렌더는 로컬.  
 - 브랜드 아티팩트는 **구(빨강=한국) 일부 가능** — 코드가 **source of truth** (무채색+형태).
