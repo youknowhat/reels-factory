@@ -1,7 +1,8 @@
 # statistics-visualization — 세션 핸드오프 (2026-09-25, 클라우드 세션 업데이트)
 
 > **다른 Claude/Cursor 세션에서 이렇게 시작하세요:**  
-> `~/dev/reels-factory/statistics-visualization/HANDOFF.md`를 읽고, 아래 **「활성 계획」**과 **구현 체크리스트**를 확인해. **4·5·6·9(비교 렌더)단계는 클라우드 세션(`claude/gallant-hopper-qbrotr`)에서 완료** — A/B/C 3종 16초 mp4를 만들어 사용자에게 전달함, **스타일 선택 대기 중**. 사용자가 스타일을 고르면 그 스타일만 남기고 정리한 뒤 35초 전체 확장으로 진행.
+> `~/dev/reels-factory/statistics-visualization/HANDOFF.md`와 **`storyboards/alcohol/storyboard.md`**를 읽어.  
+> **현재 상태 (2026-09-25 클라우드 세션):** A/B/C 16초 비교안은 사용자가 **전부 거절**("20년 전 모션그래픽", "기울인 뱃지로 손맛 흉내", "재미·전달력·영상미 없음"). 새 방향 = **3D 오브젝트가 곧 데이터**(소주병·짝·잔·사람) + 제품 사진급 렌더. 키프레임 7장(`storyboards/alcohol/*.jpg`, 실제 파이프라인 렌더)을 사용자에게 전달, **방향 승인 대기 중.** 승인 전에는 에피소드 제작 코드를 만들지 말 것.
 
 ---
 
@@ -87,7 +88,7 @@ UN 0.75 전망·230위 퀴즈·차드 8배·손주 14명·투표 엔딩 — 사�
 
 **목표:** 술 편 **도입~반전2 (~16초)** 를 **비주얼 A/B/C 3종**으로 렌더 → 사용자 선택 → **전체 ~35초** 완성 + 캡션.
 
-**중단 지점 (2026-09-25 클라우드 세션 완료분):** 구현 단계 **1~6, 8 완료**. A/B/C 3종 16초 mp4 렌더 완료, 사용자에게 전달함 — **사용자의 스타일 선택 대기 중**. 다음 세션은 사용자가 고른 스타일(A/B/C 중 하나)만 남기고 `src/episodes/alcohol/scenes-<나머지 두 글자>.tsx`와 `Root.tsx`의 해당 `Alcohol-*` Composition 2개를 정리한 뒤, 그 스타일로 **전체 35초** 대본(비유·결론·댓글 유도 장면 추가) 확장부터 시작.
+**중단 지점 (2026-09-25 클라우드 세션):** A/B/C 비교안 거절됨 → **스토리보드 단계로 되돌아감.** `storyboards/alcohol/storyboard.md`에 ~32초 전체 비트·신규 나레이션 초안·모션·사운드·숫자 근거·결정 사항 정리, 키프레임 7장 렌더(`node scripts/storyboard.mjs`). **사용자 방향 승인 대기.** 승인되면: 1→2번 전환만 5초 애니메이틱으로 먼저 → 확인 → 전체 제작. A/B/C 코드(`scenes-a/b/c.tsx`, `src/props/`, `src/motion/`, `Root.tsx`의 `Alcohol-*`)는 제작 시작할 때 삭제 대상.
 
 ### 2.1 술 편 스토리 (전체 ~35초, 초안)
 
@@ -304,34 +305,41 @@ Factfulness 무지 테스트, NYT You Draw It, Mona Chalabi 비유, Kurzgesagt S
 | | **결과물만 보고 종료** |
 | | **reels-factory 클라oud 이어하기** — 코드 원격 + 계획 전달 |
 | | (한도) session limit — Git push로 `claude/gallant-hopper-qbrotr` |
-| | **클라우드 세션 진행**: 4·5·6단계 구현 + A/B/C 16초 mp4 렌더 완료, 사용자에게 파일 전달, 스타일 선택 요청 중 |
+| | **클라우드 세션 진행**: 4·5·6단계 구현 + A/B/C 16초 mp4 렌더 완료, 사용자에게 파일 전달 |
+| | A/B/C **전부 거절** — "20년 전 모션그래픽", 기울인 뱃지 = 1차원적 손맛 흉내, 재미·전달력·영상미 없음. 코드 전에 **콘셉트·스토리보드부터** 확인받기로 |
+| | 이미지 생성은 "꼭 필요할 때만", 필요하면 ElevenLabs 고려 → 이번 방향은 실제 렌더라 불필요. ElevenLabs는 사운드에 쓰기로 제안(클라우드 네트워크가 `api.elevenlabs.io` 차단 중) |
 
 ---
 
 ## 10. 새 세션용 프롬프트 (복붙)
 
-**스타일 선택 전 (지금):** 사용자가 A/B/C 중 어느 쪽인지 아직 답하지 않았다면, 새 세션은 먼저 `out/alcohol-{a,b,c}.mp4`(로컬에 없으면 위 렌더 명령으로 재생성)를 사용자에게 보여주고 선택부터 받을 것 — 임의로 하나를 골라 진행하지 말 것.
+**방향 승인 전 (지금):** 사용자가 스토리보드(`storyboards/alcohol/storyboard.md` + 키프레임 7장)에 답하지 않았다면 먼저 그걸 보여주고 답을 받을 것. 에피소드 제작 코드 착수 금지.
 
-**스타일 선택 후:**
+**방향 승인 후:**
 ```
 프로젝트: ~/dev/reels-factory/statistics-visualization
-HANDOFF.md를 읽었어. A/B/C 중 <사용자가 고른 스타일>로 확정.
+HANDOFF.md와 storyboards/alcohol/storyboard.md를 읽었어. 스토리보드 방향 승인됨 (+ 결정 사항 답: ...).
 
-1. src/episodes/alcohol/scenes-<나머지 두 스타일 글자>.tsx 삭제, Root.tsx에서 해당 Alcohol-* Composition 2개 제거.
-2. <고른 스타일>로 전체 35초 episode.json 확장: §2.1 표의 비유(소주 1.35병)·결론(착각 도장)·댓글유도 장면 추가.
-   나레이션은 hook~reveal2 구간 public/vo/alcohol/ 재사용(prep --reuse 우선 시도), 새 장면만 신규 생성.
-3. 7단계 sfx/music 스크립트 작성.
-4. 최종 stills + mp4 렌더.
+1. 1번(테이블) → 2번(소주 짝 탑) 전환만 5초 애니메이틱으로 먼저: src/storyboard/kit3d.tsx 재사용, 0.5배 해상도.
+   사운드 포함해서 사용자에게 보여주고 모션 톤 확인받기.
+2. 확인되면 A/B/C 코드(scenes-a/b/c.tsx, src/props, src/motion, Root.tsx의 Alcohol-*) 삭제하고
+   episodes/alcohol/을 스토리보드 7비트 기준으로 새로 구성. episode.json을 ~32초로 확장
+   (신규 나레이션 초안은 storyboard.md), prep.mjs alcohol로 VO 생성 — 기존 4문장은 --reuse로 유지.
+3. sfx/music (ElevenLabs Sound Effects·Music API) — 클라우드면 네트워크 허용 + 키 필요, 아니면 로컬.
+4. 전체 렌더 → 프레임 연속(컨택트시트)으로 모션 직접 검수한 뒤에만 전달.
 
-한국은 색이 아니라 Pin/Dot, 하단 잉크 띠 유지, 세리프 금지.
-씬 자체 텍스트는 y<1400에서만 그릴 것 — 자막이 이미 y≈1372~1436을 씀 (겹침 주의, HANDOFF §3 구현 메모 참고).
-
-이대로 진행해.
+규칙: 한국 = 색이 아니라 형태(소주병 실루엣), 기울인 장식 금지, 하단 잉크 띠 유지, 세리프 금지,
+씬 텍스트는 y<1350 (자막 y≈1372~1436).
 ```
 
 ---
 
 ## 11. 알려진 갭·주의
+
+- **3D 스토리보드 킷 (`src/storyboard/`) 함정:** Remotion의 `ThreeCanvas`는 프레임당 `advance()`를 **한 번**만 돈다 →
+  drei `<Instances>`(두 번째 틱에 인스턴스 등록)는 아무것도 안 그림 — `kit3d.tsx`의 `Instanced`(layout effect에서 행렬 기록) 사용.
+  three의 투과(transmission)는 **불투명 물체만** 비춰 보여줌 → 어두운 장면에선 병 뒤에 밝은 불투명 배경(`Sweep`)이 있어야 초록이 보임.
+  얇은 유리는 `depthWrite:false`여야 안의 액체(투명 오브젝트)가 보임. 캔버스 텍스처(라벨)는 폰트 로드 후 만들고, 그 뒤에 `ThreeCanvas`를 마운트.
 
 - `README.md`의 `src/episode.json`, `out/ep01-fertility.mp4` 경로는 **구조 리팩 전** 설명 — `episodes/fertility/` 기준으로 작업.  
 - 계획서의 **형광 연두 강조** vs **현 tokens.ts 전무채색** — C 스타일 또는 palette 검증 후 연두 도입 여부 사용자에게 확인 가능.  
