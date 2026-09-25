@@ -1,0 +1,21 @@
+/* 미니멀 노트형: 흰 종이, 부드러운 바탕체, 옅은 모눈, 녹색 강조 */
+:root {
+  --paper: #FBFAF6; --ink: #1E1E1C; --muted: #77756E; --rule: #E4E1D8; --panel: #F1EFE8;
+  --accent: #2E6B4F; --gutter: 96px;
+  --f-display: 'Gowun Batang', serif; --w-display: 700;
+  --f-body: 'Pretendard', sans-serif; --f-mono: 'IBM Plex Mono', 'Pretendard', monospace;
+}
+.slide { background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px); background-size: 54px 54px; background-position: -1px -1px; }
+.slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(var(--paper), rgba(251,250,246,.86)); pointer-events: none; }
+.slide > * { position: relative; }
+.runner { position: absolute; }
+.body, .steps b { font-weight: 500; }
+.headline { font-size: 88px; letter-spacing: -0.04em; }
+.title { font-size: 60px; }
+.fig { border-radius: 6px; }
+.layout-hook .fig.hero { margin: 0 0 56px; height: 620px; border-radius: 10px; }
+.steps { border-left: 2px solid var(--accent); padding-left: 32px; }
+.steps li { grid-template-columns: 64px 1fr; }
+.steps .no { font-family: var(--f-mono); font-size: 30px; font-weight: 500; padding-top: 8px; }
+.kicker { color: var(--accent); }
+.insight .punch { color: var(--accent); }

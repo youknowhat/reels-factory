@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+{% if s.kicker %}<p class="kicker">{{ s.kicker }}</p>{% endif %}
+<h2 class="title">{{ lines(s.title) }}</h2>
+<div class="compare">
+{% for side in [s.left, s.right] %}
+  <div class="col">
+    <p class="label">{{ side.label }}</p>
+    {% if side.image %}{{ fig(side.image) }}{% endif %}
+    {% if side.big %}<p class="big">{{ side.big }}</p>{% endif %}
+    {% if side.text %}<p class="body">{{ lines(side.text) }}</p>{% endif %}
+  </div>
+{% endfor %}
+</div>
+{% if s.body %}<p class="body foot">{{ lines(s.body) }}</p>{% endif %}
+{% endblock %}

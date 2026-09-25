@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+{{ fig(s.image, 'hero') }}
+<div class="hook-text">
+  {% if s.kicker %}<p class="kicker">{{ s.kicker }}</p>{% endif %}
+  <h1 class="headline">{{ lines(s.headline) }}</h1>
+  {% if s.sub %}<p class="sub">{{ lines(s.sub) }}</p>{% endif %}
+</div>
+{% endblock %}

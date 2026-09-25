@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<link rel="stylesheet" href="{{ root }}/node_modules/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/noto-serif-kr/korean-700.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/noto-serif-kr/korean-900.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/noto-serif-kr/latin-700.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/noto-serif-kr/latin-900.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/gowun-batang/korean-400.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/gowun-batang/korean-700.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/gowun-batang/latin-400.css">
+<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/ibm-plex-mono/500.css">
+<link rel="stylesheet" href="{{ root }}/templates/themes/base.css">
+<link rel="stylesheet" href="{{ root }}/templates/themes/{{ theme }}.css">
+</head><body>
+<div class="slide layout-{{ s.layout }} n{{ n }}{% if n == total %} last{% endif %}">
+  <header class="runner"><span class="series">{{ post.series }}</span><span class="folio">{{ '%02d' % n }} / {{ '%02d' % total }}</span></header>
+  {% block content %}{% endblock %}
+</div>
+</body></html>

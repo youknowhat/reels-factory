@@ -1,0 +1,16 @@
+/* 잡지형: 종이 톤, 굵은 명조 헤드라인, 버밀리언 강조 하나 */
+:root {
+  --paper: #F3EFE6; --ink: #171512; --muted: #6B655B; --rule: #D9D2C3; --panel: #E9E3D6;
+  --accent: #C8421B; --gutter: 88px;
+  --f-display: 'Noto Serif KR', serif; --w-display: 900;
+  --f-body: 'Pretendard', sans-serif; --f-mono: 'IBM Plex Mono', 'Pretendard', monospace;
+}
+.runner { border-bottom: 1px solid var(--ink); padding-bottom: 14px; color: var(--ink); }
+.layout-hook .fig.hero { margin-top: -54px; }
+.layout-hook .headline { font-size: 100px; }
+.fig { outline: 1px solid var(--ink); }
+.layout-hook .fig { outline: none; }
+.insight .punch { font-style: normal; }
+.insight .punch::before { content: ''; display: block; width: 120px; height: 8px; background: var(--accent); margin-bottom: 44px; }
+.closing .message::after { content: ''; display: block; width: 80px; height: 8px; background: var(--accent); margin-top: 40px; }
+.quote::before { content: '“'; display: block; font-size: 180px; line-height: 0.6; color: var(--accent); margin-bottom: 20px; }

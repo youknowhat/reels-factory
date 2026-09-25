@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+<p class="kicker">{{ s.kicker or '직접 해보기' }}</p>
+<h2 class="title">{{ lines(s.title) }}</h2>
+<dl class="spec">
+{% for row in s.rows %}<div><dt>{{ row[0] }}</dt><dd>{{ lines(row[1]) }}</dd></div>{% endfor %}
+</dl>
+{% if s.prompt %}<div class="prompt"><p class="label">{{ s.prompt_label or '첫 한 줄' }}</p><p class="mono">{{ lines(s.prompt) }}</p></div>{% endif %}
+{% endblock %}
