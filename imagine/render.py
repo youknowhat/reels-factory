@@ -90,6 +90,9 @@ def render(slug, theme=None, out=None):
         browser = pw.chromium.launch(executable_path=_chromium_path())
         page = browser.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
         for i, s in enumerate(post["slides"], 1):
+            img = s.get("image")
+            if img:
+                img["missing"] = not (post_dir / "assets" / img["file"]).exists()
             html = env.get_template(f"layouts/{s['layout']}.html").render(
                 s=s, post=post, n=i, total=total, theme=theme, credits=credits,
                 root=ROOT.as_uri(), assets=(post_dir / "assets").as_uri())
@@ -99,7 +102,10 @@ def render(slug, theme=None, out=None):
             page.evaluate("document.fonts.ready")
             page.wait_for_load_state("networkidle")
             m = page.evaluate(MEASURE_JS)
-            m.update(n=i, layout=s["layout"], text=page.inner_text(".slide"))
+            m.update(n=i, layout=s["layout"], text=page.inner_text(".slide"),
+                     image=img["file"] if img else None,
+                     image_missing=bool(img and img["missing"]),
+                     image_own=bool(img and credits.get(img.get("key"), {}).get("own")))
             metrics.append(m)
             png = out / f"{i:02d}.png"
             page.screenshot(path=str(png), clip={"x": 0, "y": 0, "width": W, "height": H})

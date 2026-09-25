@@ -2,16 +2,12 @@
 <html lang="ko"><head><meta charset="utf-8">
 <link rel="stylesheet" href="{{ root }}/node_modules/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/instrument-serif/latin-400.css">
-<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/instrument-serif/latin-400-italic.css">
-<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/inter-tight/latin-500.css">
-<link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/inter-tight/latin-700.css">
 <link rel="stylesheet" href="{{ root }}/node_modules/@fontsource/ibm-plex-mono/500.css">
 <link rel="stylesheet" href="{{ root }}/templates/themes/{{ theme }}.css">
 </head><body>
-<div class="slide layout-{{ s.layout }} {{ s.tone or 'light' }}">
-  {% if s.layout != 'cover' %}
-  <header class="runner"><span class="mark">{{ post.masthead }}</span><span class="folio">{{ post.issue }} &nbsp;·&nbsp; {{ '%02d' % n }}/{{ '%02d' % total }}</span></header>
-  {% endif %}
+<div class="slide layout-{{ s.layout }}{% if n == 1 %} is-cover{% endif %}">
   {% block content %}{% endblock %}
+  {% if n != 1 %}<span class="brand">{{ post.masthead }}</span>{% endif %}
+  <p class="label">{{ post.masthead }} &nbsp;|&nbsp; {{ post.section or 'AI' }}</p>
 </div>
 </body></html>

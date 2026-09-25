@@ -1,106 +1,77 @@
 {
  "masthead": "상상한도",
- "issue": "No.01",
- "date": "2026.09",
+ "section": "AI",
  "handle": "@sangsang.hando",
  "theme": "magazine",
  "slides": [
   {
-   "layout": "cover",
-   "tone": "dark",
+   "layout": "photo",
+   "image": {
+    "file": "01_cover.jpg",
+    "key": "guardian",
+    "want": "가디언 기사 대표 사진(og:image). 인물이 보이는 사진이면 좋다. 저작권 확인 필요",
+    "og": "https://aicommission.org/2026/07/i-thought-ive-tried-everything-else-why-not-give-ai-a-shot-the-long-lost-family-reunited-by-chatgpt/"
+   },
+   "headline": "엄마 이름 하나로\n60년 만에 가족을 찾았다",
+   "sub": "그가 ChatGPT에 던진 질문"
+  },
+  {
+   "layout": "photo",
+   "chat": {
+    "label": "ChatGPT에게 보낸 메시지 · 재구성",
+    "text": "생모를 찾고 있어요.\n이름은 사빈데르.",
+    "typing": false
+   },
+   "headline": "그가 아는 건\n이름 하나뿐이었다",
+   "sub": "성도, 사진도, 사는 곳도 몰랐다"
+  },
+  {
+   "layout": "photo",
    "chat": {
     "label": "ChatGPT에게 보낸 메시지 · 재구성",
     "text": "생모를 찾고 있어요. 이름은 사빈데르.\n**살아 계시면 87~97세쯤**, **중간 이름은\n아마 '카우르'**. **인도·케냐·영국 어딘가에\n연고가 있었을 거예요.**",
     "typing": true
    },
-   "tag": "AI USE CASE 01",
-   "headline": "이름 하나로\n60년 만에\n가족을 찾았다",
-   "sub": "ChatGPT에 '짐작'까지 적어 넣은 한 남자"
+   "headline": "그래서 **짐작**까지\n함께 적었다",
+   "sub": "나이, 중간 이름, 살았을 법한 나라"
   },
   {
-   "layout": "article",
-   "tone": "light",
-   "kicker": "01 — 이름 하나",
-   "lead": "캐나다에 사는 아바타르가 생모에 대해 아는 건 이름 하나였다. 사빈데르.\n\n성도, 사진도, 사는 곳도 몰랐다. 이름 하나로 사람을 찾는 건 검색창에서는 거의 불가능한 일이다.",
-   "aside": "그는 여러 방법을 다 써본 뒤였다. 마지막으로 연 게 ChatGPT였다."
-  },
-  {
-   "layout": "chat",
-   "tone": "dark",
-   "kicker": "02 — 그가 적은 것",
-   "title": "그는 아는 것만\n적지 않았다",
-   "rows": [
-    [
-     "이름은 사빈데르",
-     "확실",
-     false
-    ],
-    [
-     "지금 87~97세쯤",
-     "짐작",
-     true
-    ],
-    [
-     "중간 이름은 아마 '카우르'",
-     "짐작",
-     true
-    ],
-    [
-     "인도·케냐·영국과 연고",
-     "짐작",
-     true
-    ]
-   ],
-   "foot": "넷 중 셋이\n**짐작**이었다."
-  },
-  {
-   "layout": "statement",
-   "tone": "light",
-   "kicker": "03 — 찾아낸 것",
-   "big": "AI가 찾아낸 건\n**한 편의 글**이었다.",
-   "body": "런던의 한 주얼리 디자이너가 자기 어머니에 대해 쓴 글. 이름도, 나이도, 살아온 곳도 그의 짐작과 겹쳤다.",
+   "layout": "photo",
    "doc": {
     "meta": "LONDON · 딸이 쓴 어머니 이야기",
     "hit": "사빈데르"
-   }
+   },
+   "headline": "AI가 찾아낸 건\n한 편의 글이었다",
+   "sub": "런던의 한 여성이 어머니에 대해 쓴 글"
   },
   {
-   "layout": "numeral",
-   "tone": "dark",
-   "num": "60",
-   "unit": "년 만",
-   "text": "그 글을 쓴 사람은\n그의 **동생**이었다."
+   "layout": "photo",
+   "image": {
+    "file": "05_reunion.jpg",
+    "key": "guardian",
+    "want": "재회 사진 또는 니키 다무 관련 보도 사진(가디언/업워시)"
+   },
+   "headline": "그 글을 쓴 사람은\n그의 **동생**이었다",
+   "sub": "헤어진 지 60년 만이었다"
   },
   {
-   "layout": "quote",
-   "tone": "light",
-   "quote": "다른 건 다 해봤으니까,\nAI한테도 한번\n물어보자 싶었어요.",
-   "by": "— 아바타르, The Guardian 인터뷰 (2026.7)"
+   "layout": "photo",
+   "quote": true,
+   "headline": "다른 건 다 해봤으니까,\nAI한테도 한번\n물어보자 싶었어요",
+   "sub": "— 아바타르, The Guardian 인터뷰"
   },
   {
-   "layout": "howto",
-   "tone": "light",
-   "kicker": "직접 해보기",
-   "title": "막힌 검색을\n푸는 질문법",
-   "rows": [
-    [
-     "확실한 것",
-     "이름, 날짜,\n직접 본 것"
-    ],
-    [
-     "짐작되는 것",
-     "나이대, 지역,\n그럴듯한 이름"
-    ],
-    [
-     "가능성 있는 것",
-     "옮겨 갔을\n만한 곳"
-    ]
-   ],
-   "prompt": "확실한 건 ___, 짐작하는 건 ___야.\n짐작이 틀릴 수 있다는 걸 감안해서\n찾아볼 단서를 순서대로 알려줘."
+   "layout": "photo",
+   "image": {
+    "file": "07_demo.png",
+    "key": "own",
+    "want": "우리 시연: 아래 틀로 ChatGPT에 '가상의 예시'를 넣은 대화 화면 캡처(실존 인물 정보 금지). 틀: 확실한 건 ___, 짐작하는 건 ___야. 짐작이 틀릴 수 있다는 걸 감안해서 찾아볼 단서를 순서대로 알려줘."
+   },
+   "headline": "확실한 것과 짐작을\n나눠서 적어보세요",
+   "sub": "우리가 해본 질문 틀은 캡션에"
   },
   {
    "layout": "closing",
-   "tone": "dark",
    "message": "모두가 같은 AI를 쓴다.\n다른 건,\n**무엇을 적어 넣느냐**다.",
    "share": "누군가를 찾고 있는 사람에게\n이 글을 보내주세요.",
    "follow": "매주 한 편, 누군가 먼저 떠올린 AI 이야기"

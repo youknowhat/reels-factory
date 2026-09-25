@@ -1,5 +1,0 @@
-{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
-<p class="kicker">{{ s.kicker }}</p>
-<p class="lede">{{ lines(s.lead) }}</p>
-{% if s.aside %}<p class="aside">{{ lines(s.aside) }}</p>{% endif %}
-{% endblock %}

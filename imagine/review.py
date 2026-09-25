@@ -12,7 +12,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent
 W, H = 1080, 1350
-MAX_SRC_AREA = 0.40
+MAX_OTHERS = 0.5
 MAX_CHARS = 170
 BANNED = ["!", "놀랍게도", "충격", "숨겨진", "AI 시대 필수", "✨", "가지 방법"]
 EMOJI = re.compile("[\U0001F300-\U0001FAFF☀-➿]")
@@ -34,7 +34,7 @@ def main(slug):
         if Image.open(p).size != (W, H):
             fails.append(f"{p.name} 크기 {Image.open(p).size}")
 
-    src_total = 0.0
+    others = 0
     for m in metrics:
         tag = f"{m['n']:02d}({m['layout']})"
         if m["overflow"]:
@@ -49,17 +49,19 @@ def main(slug):
                 fails.append(f"{tag} 금지어 '{b}'")
         if EMOJI.search(m["text"]):
             fails.append(f"{tag} 이모지")
+        if m.get("image_missing"):
+            fails.append(f"{tag} 이미지 필요: assets/{m['image']}")
         for im in m["images"]:
             if not im["loaded"]:
                 fails.append(f"{tag} 이미지 로드 실패 {im['src']}")
-        area = sum(im["area"] for im in m["images"])
-        src_total += area
-        if m["images"] and not m["credits"]:
-            fails.append(f"{tag} 원본 이미지에 출처 칩 없음")
+        if m.get("image") and not m.get("image_own"):
+            others += 1
+            if not m["credits"]:
+                fails.append(f"{tag} 원본 이미지에 출처 없음")
 
-    ratio = src_total / max(len(metrics), 1)
-    if ratio > MAX_SRC_AREA:
-        fails.append(f"원본 이미지 면적 {ratio:.0%} (> {MAX_SRC_AREA:.0%}, aggregator 위험)")
+    ratio = others / max(len(metrics), 1)
+    if ratio > MAX_OTHERS:
+        fails.append(f"남의 이미지를 쓴 장 {others}/{len(metrics)} (> {MAX_OTHERS:.0%}, aggregator 위험)")
 
     if caption:
         lines = [l for l in caption.splitlines() if l.strip() and not l.startswith("# ")]
@@ -75,7 +77,7 @@ def main(slug):
     else:
         warns.append("caption.md 없음")
 
-    print(f"[{slug}] 장수 {len(pngs)} · 원본 이미지 면적 평균 {ratio:.0%}")
+    print(f"[{slug}] 장수 {len(pngs)} · 남의 이미지 {others}장")
     for f in fails:
         print("FAIL", f)
     for w in warns:

@@ -1,4 +1,5 @@
 [
- {"key": "guardian", "title": "'I thought, I've tried everything else, why not give AI a shot': the long-lost family reunited by ChatGPT", "publisher": "The Guardian", "date": "2026-07", "url": "https://aicommission.org/2026/07/i-thought-ive-tried-everything-else-why-not-give-ai-a-shot-the-long-lost-family-reunited-by-chatgpt/", "license": "quote"},
- {"key": "upworthy", "title": "Man uses ChatGPT to find long-lost biological mother", "publisher": "Upworthy", "url": "https://www.upworthy.com/pn-man-uses-chatgpt-to-find-long-lost-biological-mother/", "license": "quote"}
+ {"key": "guardian", "title": "'I thought, I've tried everything else, why not give AI a shot': the long-lost family reunited by ChatGPT", "publisher": "The Guardian", "date": "2026-07", "url": "https://aicommission.org/2026/07/i-thought-ive-tried-everything-else-why-not-give-ai-a-shot-the-long-lost-family-reunited-by-chatgpt/", "license": "quote — 사진 사용 전 저작권 확인"},
+ {"key": "upworthy", "title": "Man uses ChatGPT to find long-lost biological mother", "publisher": "Upworthy", "url": "https://www.upworthy.com/pn-man-uses-chatgpt-to-find-long-lost-biological-mother/", "license": "quote"},
+ {"key": "own", "title": "재구성 그래픽 · 자체 시연", "publisher": "상상한도", "own": true}
 ]

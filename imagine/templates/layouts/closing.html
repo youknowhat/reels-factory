@@ -1,7 +1,7 @@
-{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
-<p class="big">{{ lines(s.message) }}</p>
-<div class="cta">
+{% extends "base.html" %}{% from "macros.html" import lines, credit with context %}{% block content %}
+<div class="text closing">
+  <h1 class="headline">{{ lines(s.message) }}</h1>
   <p class="share">{{ lines(s.share) }}</p>
-  <p class="follow"><b>{{ post.handle }}</b> {{ s.follow }}</p>
+  <p class="follow"><b>{{ post.handle }}</b>&nbsp; {{ s.follow }}</p>
 </div>
 {% endblock %}

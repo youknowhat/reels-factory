@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% from "macros.html" import lines, credit with context %}{% block content %}
+{% if s.image %}
+  {% if s.image.missing %}<div class="bg missing"><p>이미지 필요<br><code>{{ s.image.file }}</code><br>{{ s.image.want or '' }}</p></div>
+  {% else %}<img class="bg src{% if credits.get(s.image.key, {}).own %} own{% endif %}" src="{{ assets }}/{{ s.image.file }}" style="object-position: {{ s.image.pos or '50% 50%' }}">{% endif %}
+  <div class="shade"></div>
+  {{ credit(s.image) }}
+{% elif s.chat %}
+  <div class="chat">
+    <p class="chat-label">{{ s.chat.label }}</p>
+    <div class="bubble me">{{ lines(s.chat.text) }}</div>
+    {% if s.chat.typing %}<div class="bubble ai typing"><i></i><i></i><i></i></div>{% endif %}
+  </div>
+  {{ credit({'key': s.chat.key or 'own'}) }}
+{% elif s.doc %}
+  <div class="doc"><p class="meta">{{ s.doc.meta }}</p><div class="bar w1"></div><div class="bar w2"></div><div class="bar w3"></div><span class="hit">{{ s.doc.hit }}</span><div class="bar w2"></div><div class="bar w4"></div></div>
+  {{ credit({'key': 'own'}) }}
+{% endif %}
+<div class="text">
+  {% if s.quote %}<span class="qmark">&ldquo;</span>{% endif %}
+  <h1 class="headline">{{ lines(s.headline) }}</h1>
+  {% if s.sub %}<p class="sub">{{ lines(s.sub) }}</p>{% endif %}
+</div>
+{% endblock %}
