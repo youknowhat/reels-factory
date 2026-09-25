@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+<p class="kicker">{{ s.kicker }}</p>
+{% if s.doc %}<div class="doc"><p class="meta">{{ s.doc.meta }}</p><div class="bar w1"></div><div class="bar w2"></div><div class="bar w3"></div><span class="hit">{{ s.doc.hit }}</span><div class="bar w2"></div><div class="bar w4"></div></div>{% endif %}
+<p class="big">{{ lines(s.big) }}</p>
+{% if s.body %}<p class="body">{{ lines(s.body) }}</p>{% endif %}
+{% endblock %}

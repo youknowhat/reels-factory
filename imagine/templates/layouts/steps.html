@@ -1,8 +1,0 @@
-{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
-{% if s.kicker %}<p class="kicker">{{ s.kicker }}</p>{% endif %}
-<h2 class="title">{{ lines(s.title) }}</h2>
-<ol class="steps">
-{% for st in s.steps %}<li><span class="no">{{ loop.index }}</span><div><b>{{ st.label }}</b>{% if st.text %}<p>{{ lines(st.text) }}</p>{% endif %}</div></li>{% endfor %}
-</ol>
-{% if s.body %}<p class="body foot">{{ lines(s.body) }}</p>{% endif %}
-{% endblock %}

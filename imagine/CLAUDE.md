@@ -4,10 +4,11 @@
 
 - 메시지·독자·원고 양식: `docs/brief.md` / 계정 소개: `docs/profile.md`
 - 사례 후보: `research/backlog.md` / 이미 다룬 사례: `research/posted.json`
+- 디자인: 매거진(`templates/themes/magazine.css`), 기준작 `posts/found_by_guess`. 레이아웃 규칙은 `docs/brief.md`.
 - 한 편: `posts/<slug>/post.json`, `assets/`, `credits.json`, `caption.md` → 산출물 `output/<slug>/01.png…`
 
 ## 환경
-- `npm install`(폰트: pretendard, Noto Serif KR, Gowun Batang, IBM Plex Mono) + `pip install playwright`. 클라우드 환경엔 Chromium이 `/opt/pw-browsers`에 있다. 로컬 macOS는 `python -m playwright install chromium` 1회.
+- `npm install`(폰트: Pretendard, Instrument Serif, Inter Tight, IBM Plex Mono) + `pip install playwright`. 클라우드 환경엔 Chromium이 `/opt/pw-browsers`에 있다. 로컬 macOS는 `python -m playwright install chromium` 1회.
 - 클라우드 세션은 웹 검색은 되지만 기사 페이지 열람이 네트워크 정책에 막힐 수 있다. 원문 확인이 막히면 사용자에게 알리고, 확인 못 한 사실은 캡션 `(게시 전 확인: …)`에 올린다.
 
 ## 절대 원칙

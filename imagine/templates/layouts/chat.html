@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+<p class="kicker">{{ s.kicker }}</p>
+<h2 class="title">{{ lines(s.title) }}</h2>
+<div class="annot">
+{% for r in s.rows %}<div class="row {{ 'guess' if r[2] else 'fact' }}"><span class="txt">{{ r[0] }}</span><span class="tag">{{ r[1] }}</span></div>{% endfor %}
+</div>
+{% if s.foot %}<p class="foot">{{ lines(s.foot) }}</p>{% endif %}
+{% endblock %}

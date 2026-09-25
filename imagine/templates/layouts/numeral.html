@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+<div class="num"><span class="n">{{ s.num }}</span><span class="unit">{{ s.unit }}</span></div>
+<p class="big">{{ lines(s.text) }}</p>
+{% endblock %}

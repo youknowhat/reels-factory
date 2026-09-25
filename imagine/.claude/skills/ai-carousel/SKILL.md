@@ -4,7 +4,7 @@
 
 ## 절차
 1. **사례 확정.** 인자가 없으면 `research/backlog.md` 최상위 미제작 항목, 있으면 웹으로 확인. `research/posted.json`과 중복 확인. 1차 출처로 사실(누가·언제·무엇을·어떤 AI) 검증 — 확인 안 되면 진행하지 않고 사용자에게 보고.
-2. **원고.** `docs/brief.md`의 8장 공식대로 slug 정하고 `posts/<slug>/post.json` 작성(레이아웃: hook/person/steps/compare/evidence/quote/tryit/insight/closing 중 6~8개 조합). `posts/<slug>/credits.json`(원본 출처), `posts/<slug>/assets/`(원본 캡처, 사용자 허락된 것만), `posts/<slug>/caption.md` 작성.
+2. **원고.** `docs/brief.md`의 8장 공식대로 slug 정하고 `posts/<slug>/post.json` 작성(매거진 레이아웃: cover/article/chat/statement/numeral/quote/howto/closing, 톤 dark/light 교차 — 기준작 `posts/found_by_guess`). `posts/<slug>/credits.json`(원본 출처), `posts/<slug>/assets/`(원본 캡처, 사용자 허락된 것만), `posts/<slug>/caption.md` 작성.
    - 연결 점검: 8장 본문만 이어 읽어 하나의 이야기가 되는지, 인접 장이 인과로 이어지는지 확인.
    - 원본 이미지를 쓰는 장은 절반 이하로 유지(aggregator 방어).
    - **사용자 승인 후 렌더로 진행.**
@@ -14,5 +14,5 @@
 6. **기록.** `research/posted.json`에 `{slug, title, date, category}` 추가.
 
 ## 참고
-- 템플릿: `templates/layouts/*.html`(구조) + `templates/themes/{magazine,scrap,note}.css`(디자인, 하나로 고정 예정). 새 레이아웃이 필요하면 기존 걸 복제해 최소만 바꾼다.
+- 템플릿: `templates/layouts/*.html`(구조) + `templates/themes/magazine.css`(확정 디자인). 새 레이아웃이 필요하면 기존 걸 복제해 최소만 바꾼다.
 - 금지어·형식 규칙은 `CLAUDE.md` "절대 원칙" 참고. 매 편 이걸 다시 읽지 말고, 위반 의심될 때만 확인.

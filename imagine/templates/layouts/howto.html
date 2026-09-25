@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
+<p class="kicker">{{ s.kicker }}</p>
+<h2 class="title">{{ lines(s.title) }}</h2>
+<div class="grid3">
+{% for r in s.rows %}<div class="cell"><p class="lab">{{ r[0] }}</p><p class="ex">{{ lines(r[1]) }}</p></div>{% endfor %}
+</div>
+<div class="prompt"><p class="lab">{{ s.prompt_label or '그대로 써보세요' }}</p><p class="p">{{ lines(s.prompt) }}</p></div>
+{% endblock %}

@@ -13,7 +13,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent
 W, H = 1080, 1350
 MAX_SRC_AREA = 0.40
-MAX_CHARS = 110
+MAX_CHARS = 170
 BANNED = ["!", "놀랍게도", "충격", "숨겨진", "AI 시대 필수", "✨", "가지 방법"]
 EMOJI = re.compile("[\U0001F300-\U0001FAFF☀-➿]")
 

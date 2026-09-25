@@ -14,13 +14,13 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent
 W, H = 1080, 1350
-SAFE_Y = 90
+SAFE_Y = 50
 
 
 def rich(t):
     """escape → **강조** → <b>, 줄바꿈 → <br>"""
     h = str(escape(t or ""))
-    h = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", h)
+    h = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", h, flags=re.S)
     return Markup(h.replace("\n", "<br>"))
 
 MEASURE_JS = """

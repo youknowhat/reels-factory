@@ -1,6 +1,5 @@
 {% extends "base.html" %}{% from "macros.html" import fig, lines with context %}{% block content %}
-{% if s.kicker %}<p class="kicker">{{ s.kicker }}</p>{% endif %}
+<span class="qmark">&ldquo;</span>
 <blockquote class="quote">{{ lines(s.quote) }}</blockquote>
 <p class="by">{{ s.by }}</p>
-{% if s.body %}<p class="body foot">{{ lines(s.body) }}</p>{% endif %}
 {% endblock %}

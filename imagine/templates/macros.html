@@ -1,6 +1,6 @@
 {% macro fig(img, cls='') -%}
 {% set c = credits.get(img.key, {}) %}
-<figure class="fig {{ cls }} {{ img.cls or '' }}">
+<figure class="fig {{ cls }}">
   <img class="src" src="{{ assets }}/{{ img.file }}" style="object-position: {{ img.pos or '50% 50%' }}">
   <figcaption class="credit">{{ img.credit or c.handle or c.publisher or c.title }}</figcaption>
 </figure>
